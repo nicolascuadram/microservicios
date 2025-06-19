@@ -1,0 +1,10 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-net --allow-env --allow-read --allow-write --allow-ffi --watch main.ts",
+    "lint": "deno lint"
+  },
+  "imports": {
+    "@oak/oak": "jsr:@oak/oak@17.1.4",
+    "@cd/sqlite": "jsr:@cd/sqlite@0.12.0"
+  }
+}

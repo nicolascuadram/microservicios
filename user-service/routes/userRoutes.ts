@@ -4,17 +4,17 @@ import db from "../db/database.ts";
 const router = new Router();
 
 router.post("/users", async (ctx) => {
-  const { name, age } = await ctx.request.body.json();
+  const { name } = await ctx.request.body.json();
 
-  if (typeof name !== "string" || typeof age !== "number") {
+  if (typeof name !== "string") {
     ctx.response.status = 400;
-    ctx.response.body = { error: "Nombre o edad inválidos" };
+    ctx.response.body = { error: "Nombre inválido" };
     return;
   }
 
   try {
-    const stmt = db.prepare("INSERT INTO users (name, age) VALUES (?, ?)");
-    stmt.run(name, age);
+    const stmt = db.prepare("INSERT INTO user (name) VALUES (?)");
+    stmt.run(name);
     ctx.response.status = 201;
     ctx.response.body = { message: "Usuario creado" };
   } catch (err) {
@@ -25,7 +25,7 @@ router.post("/users", async (ctx) => {
 });
 
 router.get("/users", (ctx) => {
-  const stmt = db.prepare("SELECT * FROM users");
+  const stmt = db.prepare("SELECT * FROM user");
   const result = stmt.all();
   ctx.response.status = 200;
   ctx.response.body = result;
@@ -33,8 +33,8 @@ router.get("/users", (ctx) => {
 
 router.get("/users/:id", (ctx) => {
   const id = ctx.params.id;
-  const stmt = db.prepare("SELECT * FROM users WHERE id = ?");
-  const result = stmt.get(id);
+  const stmt = db.prepare("SELECT * FROM user WHERE id = ?");
+  const result = stmt.get(Number(id));
 
   if (!result) {
     ctx.response.status = 404;
