@@ -1,7 +1,7 @@
 {
   "tasks": {
     "dev": "deno run --allow-net --allow-env --allow-read --allow-write --allow-ffi --watch main.ts",
-    "lint": "deno lint"
+    "start": "deno run --allow-net --allow-env --allow-read --allow-write --allow-ffi main.ts"
   },
   "imports": {
     "@oak/oak": "jsr:@oak/oak@17.1.4",

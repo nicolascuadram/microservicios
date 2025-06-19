@@ -1,6 +1,7 @@
 import { Database } from "@cd/sqlite";
 
-const db = new Database("users.db");
+const path = Deno.env.get("DATABASE_PATH") ?? "./data/users.db";
+const db = new Database(path);
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS user (

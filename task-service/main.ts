@@ -3,7 +3,7 @@ import mainRoutes from "./routes/mainRoutes.ts";
 import taskRoutes from "./routes/taskRoutes.ts";
 
 const app = new Application();
-const port = 9090;
+const port = Number(Deno.env.get("PORT")) ?? 9090;
 
 app.use(mainRoutes.routes());
 app.use(mainRoutes.allowedMethods());

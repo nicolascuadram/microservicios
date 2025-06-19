@@ -3,7 +3,7 @@ import mainRoutes from "./routes/mainRoutes.ts";
 import userRoutes from "./routes/userRoutes.ts";
 
 const app = new Application();
-const port = 8080;
+const port = Number(Deno.env.get("PORT")) ?? 8080;
 
 app.use(mainRoutes.routes());
 app.use(mainRoutes.allowedMethods());

@@ -13,7 +13,7 @@ router.post("/tasks", async (ctx) => {
   }
 
   try {
-    const res = await fetch(`http://localhost:8080/users/${user_id}`);
+    const res = await fetch(`http://user-service:8080/users/${user_id}`);
     if (!res.ok) {
       ctx.response.status = 404;
       ctx.response.body = { error: "Usuario no encontrado" };
@@ -43,7 +43,7 @@ router.get("/tasks", async (ctx) => {
 
   if (user_id) {
     try {
-      const res = await fetch(`http://localhost:8080/users/${user_id}`);
+      const res = await fetch(`http://user-service:8080/users/${user_id}`);
       if (!res.ok) {
         ctx.response.status = 404;
         ctx.response.body = { error: "Usuario no encontrado" };
