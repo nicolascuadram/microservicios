@@ -5,13 +5,12 @@ services:
     restart: unless-stopped
     environment:
       - PORT=8080
-      - DATABASE_PATH=./data/users.db
     volumes:
-      - ./user-service/data:/data
+      - ./user-service/data:/app/data
     networks:
       - backend
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/health" ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -25,13 +24,12 @@ services:
     restart: unless-stopped
     environment:
       - PORT=9090
-      - DATABASE_PATH=./data/tasks.db
     volumes:
-      - ./task-service/data:/data
+      - ./task-service/data:/app/data
     networks:
       - backend
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:9090" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:9090/health" ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -52,7 +50,7 @@ services:
     networks:
       - backend
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:80" ]
       interval: 10s
       timeout: 5s
       retries: 3

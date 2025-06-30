@@ -1,6 +1,6 @@
 import { Database } from "@cd/sqlite";
 
-const path = Deno.env.get("DATABASE_PATH") ?? "./data/tasks.db";
+const path = "./data/tasks.db";
 const db = new Database(path);
 
 db.exec(`
