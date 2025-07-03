@@ -34,7 +34,8 @@ docker-compose up --build -d
 http://localhost/api/users/users/
 ```json
 {
-  "name": "Javier"
+  "name": "Javier",
+  "email": "javier@gmail.com"
 }
 ```
 

@@ -23,7 +23,6 @@ services:
 
   user-service:
     build: ./user-service
-    container_name: user-service
     restart: unless-stopped
     environment:
       - PORT=8080
@@ -38,11 +37,10 @@ services:
       retries: 3
       start_period: 10s
     deploy:
-      replicas: 1
+      replicas: 2
 
   task-service:
     build: ./task-service
-    container_name: task-service
     restart: unless-stopped
     environment:
       - PORT=9090
@@ -57,7 +55,7 @@ services:
       retries: 3
       start_period: 10s
     deploy:
-      replicas: 1
+      replicas: 2
 
 networks:
   backend:
