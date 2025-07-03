@@ -4,17 +4,24 @@ import db from "../db/database.ts";
 const router = new Router();
 
 router.post("/users", async (ctx) => {
-  const { name } = await ctx.request.body.json();
+  const { name, email } = await ctx.request.body.json();
 
   if (typeof name !== "string") {
     ctx.response.status = 400;
-    ctx.response.body = { error: "Nombre inválido" };
+    ctx.response.body = { error: "Nombre no válido" };
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (typeof email !== "string" || !emailRegex.test(email)) {
+    ctx.response.status = 400;
+    ctx.response.body = { error: "Email no válido" };
     return;
   }
 
   try {
-    const stmt = db.prepare("INSERT INTO user (name) VALUES (?)");
-    stmt.run(name);
+    const stmt = db.prepare("INSERT INTO user (name, email) VALUES (?, ?)");
+    stmt.run(name, email);
     ctx.response.status = 201;
     ctx.response.body = { message: "Usuario creado" };
   } catch (err) {

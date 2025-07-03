@@ -8,7 +8,7 @@ router.post("/tasks", async (ctx) => {
 
   if (typeof title !== "string") {
     ctx.response.status = 400;
-    ctx.response.body = { error: "Título inválido" };
+    ctx.response.body = { error: "Título no válido" };
     return;
   }
 
