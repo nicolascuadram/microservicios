@@ -1,0 +1,8 @@
+{
+  "name": "admin-service",
+  "version": "1.0.0",
+  "main": "admin-service.js",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
